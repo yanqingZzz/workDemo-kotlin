@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/add_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="标题:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/add_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入标题"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_title" />
+
+        <TextView
+            android:id="@+id/add_sub_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="副标题(可选):"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_title_input" />
+
+        <EditText
+            android:id="@+id/add_sub_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入副标题"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_sub_title" />
+
+        <TextView
+            android:id="@+id/add_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="分类:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_sub_title_input" />
+
+        <HorizontalScrollView
+            android:id="@+id/add_category_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/add_category">
+
+            <LinearLayout
+                android:id="@+id/add_category_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:id="@+id/add_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="详细内容:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_category_type" />
+
+        <EditText
+            android:id="@+id/add_content_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background"
+            android:gravity="top"
+            android:hint="请输入详细内容"
+            android:maxLines="20"
+            android:minLines="6"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/add_content" />
+
+        <ImageView
+            android:id="@+id/add_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/work_favorite"
+            app:layout_constraintBottom_toTopOf="@+id/add_content_input"
+            app:layout_constraintRight_toRightOf="@+id/add_content_input" />
+
+        <TextView
+            android:id="@+id/add_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            android:text="保    存"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_content_input" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

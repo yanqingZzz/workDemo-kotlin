@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/dock_bar_item_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dock_bar_home_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dock_bar_home" />
+
+        <TextView
+            android:id="@+id/dock_bar_home_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dock_bar_home_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp"
+            android:text="首页"
+            android:textColor="@color/dock_bar_title_color_selector"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dock_bar_item_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dock_bar_category_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dock_bar_category" />
+
+        <TextView
+            android:id="@+id/dock_bar_category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dock_bar_category_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp"
+            android:text="分类"
+            android:textColor="@color/dock_bar_title_color_selector"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dock_bar_item_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dock_bar_search_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dock_bar_search" />
+
+        <TextView
+            android:id="@+id/dock_bar_search_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dock_bar_search_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp"
+            android:text="搜索"
+            android:textColor="@color/dock_bar_title_color_selector"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dock_bar_item_person"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dock_bar_person_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dock_bar_person" />
+
+        <TextView
+            android:id="@+id/dock_bar_person_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dock_bar_person_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp"
+            android:text="个人中心"
+            android:textColor="@color/dock_bar_title_color_selector"
+            android:textSize="15sp" />
+    </RelativeLayout>
+</LinearLayout>

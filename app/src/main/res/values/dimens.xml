@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_adapter_loading_more_item_height">60dp</dimen>
+    <dimen name="load_image_size">40dp</dimen>
+    <dimen name="load_image_margin">10dp</dimen>
+
+    <dimen name="category_item_padding">15dip</dimen>
+</resources>
