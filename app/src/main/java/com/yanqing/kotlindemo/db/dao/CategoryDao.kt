@@ -20,4 +20,13 @@ interface CategoryDao {
 
     @Query("SELECT * FROM category_table")
     fun queryAll(): List<CategoryEntity>
+
+    @Query("UPDATE category_table SET weight = weight + 1 WHERE id = :id")
+    fun categoryUse(id: Int)
+
+    @Query("SELECT * FROM category_table ORDER BY weight DESC LIMIT 6")
+    fun getCategoryByWeight(): List<CategoryEntity>
+
+    @Query("SELECT count(*) FROM category_table")
+    fun getCategoryCount(): Int
 }

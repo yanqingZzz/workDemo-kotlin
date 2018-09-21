@@ -11,7 +11,8 @@ class CategoryEntity {
     var category: String? = null
     @ColumnInfo(name = "time_stamp")
     var timeStamp: Long? = null
-
-    @Ignore
+    @ColumnInfo(name = "weight")
+    var weight: Long = 0
+    @ColumnInfo(name = "can_edit")
     var canEdit: Boolean = true
 }

@@ -12,7 +12,7 @@ import com.yanqing.kotlindemo.views.ErrorView
 import com.yanqing.kotlindemo.views.LoadingView
 
 abstract class BaseAdapter : RecyclerView.Adapter<AbsViewHolder> {
-    companion object BaseStatus{
+    companion object BaseStatus {
         const val STATUS_LOADING = 100
         const val STATUS_ERROR = 101
         const val STATUS_LOADING_MORE = 102
@@ -25,8 +25,11 @@ abstract class BaseAdapter : RecyclerView.Adapter<AbsViewHolder> {
     private var mIsMoreEnable: Boolean = false
     private var mHasMore: Boolean = false
 
-    constructor(context: Context) {
+    constructor(context: Context) : this(context, STATUS_LOADING)
+
+    constructor(context: Context, status: Int) {
         mContext = context
+        mStatus = status
     }
 
     fun getContext(): Context? {
@@ -81,8 +84,7 @@ abstract class BaseAdapter : RecyclerView.Adapter<AbsViewHolder> {
             STATUS_LOADING_MORE, STATUS_ERROR_MORE -> {
                 val height = mContext?.resources?.getDimension(R.dimen.base_adapter_loading_more_item_height)?.toInt()
                 if (height != null) {
-                    val params = AbsListView.LayoutParams(height,
-                            AbsListView.LayoutParams.MATCH_PARENT)
+                    val params = AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, height)
                     val layout = holder?.itemView as LinearLayout
                     layout.layoutParams = params
                     layout.orientation = LinearLayout.HORIZONTAL
@@ -112,8 +114,8 @@ abstract class BaseAdapter : RecyclerView.Adapter<AbsViewHolder> {
             return mStatus;
         } else if (mIsMoreEnable && mHasMore && position == getDataListCount()) {
             when (mStatus) {
-                STATUS_LOADING_MORE -> return STATUS_LOADING_MORE
-                else -> return STATUS_ERROR_MORE
+                STATUS_ERROR_MORE -> return STATUS_ERROR_MORE
+                else -> return STATUS_LOADING_MORE
             }
         } else {
             return getNoneViewType(position)

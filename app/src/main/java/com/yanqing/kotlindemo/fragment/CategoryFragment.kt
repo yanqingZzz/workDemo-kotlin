@@ -19,6 +19,7 @@ import com.yanqing.kotlindemo.constant.DialogMessage
 import com.yanqing.kotlindemo.db.entity.CategoryEntity
 import com.yanqing.kotlindemo.fragment.dialogfragment.CommonMessageDialogFragment
 import com.yanqing.kotlindemo.logic.CategoryLogic
+import com.yanqing.kotlindemo.recycler.CategoryItemDecoration
 import kotlin.collections.ArrayList
 
 class CategoryFragment : BaseFragment(), CategoryLogic.OnGetCategoryListListener {
@@ -80,47 +81,54 @@ class CategoryFragment : BaseFragment(), CategoryLogic.OnGetCategoryListListener
     }
 
     private val mItemClickListener = View.OnClickListener {
+        val position = it.tag
+        if (position != null && position is Int) {
+            val category = mAdapter?.getItem(position)
+            CategoryLogic.categoryClick(context, category?.id!!)
+        }
     }
 
     //可以使用lambda表达式优化
     private val mItemLongClickListener = object : View.OnLongClickListener {
         override fun onLongClick(v: View?): Boolean {
-            val position = v?.tag as Int
-            val popupMenu = PopupMenu(context, v)
-            popupMenu.inflate(R.menu.category_item_long_click_menu)
-            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-                override fun onMenuItemClick(item: MenuItem?): Boolean {
-                    when (item?.itemId) {
-                        R.id.detail -> {
-                        }
-                        R.id.delete -> {
-                            val category = mAdapter?.getItem(position)
-                            if (category?.canEdit!!) {
-                                mAdapter?.deleteItem(position)
-                                mAdapter?.notifyDataSetChanged()
-                                CategoryLogic.delete(context, category)
-                            } else {
-                                showToast("默认分类，不能删除！")
+            val position = v?.tag
+            if (position != null && position is Int) {
+                val popupMenu = PopupMenu(context, v)
+                popupMenu.inflate(R.menu.category_item_long_click_menu)
+                popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                    override fun onMenuItemClick(item: MenuItem?): Boolean {
+                        when (item?.itemId) {
+                            R.id.detail -> {
+                            }
+                            R.id.delete -> {
+                                val category = mAdapter?.getItem(position)
+                                if (category?.canEdit!!) {
+                                    mAdapter?.deleteItem(position)
+                                    mAdapter?.notifyDataSetChanged()
+                                    CategoryLogic.delete(context, category)
+                                } else {
+                                    showToast("默认分类，不能删除！")
+                                }
+                            }
+                            R.id.edit -> {
+                                val category = mAdapter?.getItem(position)
+                                if (category?.canEdit!!) {
+                                    val intent = Intent(context, AddCategoryActivity::class.java)
+                                    intent.putExtra(Constant.CATEGORY_ID, category.id)
+                                    startActivityForResult(intent, REQUEST_CODE_ADD_CATEGORY)
+                                } else {
+                                    showToast("默认分类，不能修改！")
+                                }
+                            }
+                            R.id.delete_all -> {
+                                startCheckPattern()
                             }
                         }
-                        R.id.edit -> {
-                            val category = mAdapter?.getItem(position)
-                            if (category?.canEdit!!) {
-                                val intent = Intent(context, AddCategoryActivity::class.java)
-                                intent.putExtra(Constant.CATEGORY_ID, category.id)
-                                startActivityForResult(intent, REQUEST_CODE_ADD_CATEGORY)
-                            } else {
-                                showToast("默认分类，不能修改！")
-                            }
-                        }
-                        R.id.delete_all -> {
-                            startCheckPattern()
-                        }
+                        return true
                     }
-                    return true
-                }
-            })
-            popupMenu.show()
+                })
+                popupMenu.show()
+            }
             return true
         }
     }
@@ -170,32 +178,6 @@ class CategoryFragment : BaseFragment(), CategoryLogic.OnGetCategoryListListener
             if (refresh!!) {
                 getCategoryData()
             }
-        }
-    }
-
-    class CategoryItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
-        private val mPadding = context.resources.getDimension(R.dimen.category_item_padding).toInt()
-
-        override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-            val position = parent?.getChildAdapterPosition(view)
-            val location = position!! % 3
-            when (location) {
-                0 -> {
-                    outRect?.left = mPadding * 2 / 3
-                    outRect?.right = mPadding / 3
-                }
-                1 -> {
-                    outRect?.left = mPadding / 2
-                    outRect?.right = mPadding / 2
-                }
-                2 -> {
-                    outRect?.left = mPadding / 3
-                    outRect?.right = mPadding * 2 / 3
-                }
-            }
-
-            outRect?.top = mPadding / 2
-            outRect?.bottom = mPadding / 2
         }
     }
 

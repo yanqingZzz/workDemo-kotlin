@@ -12,6 +12,11 @@ class CategoryLogic {
             listener?.onSuccess(categoryList as ArrayList<CategoryEntity>)
         }
 
+        fun getCategoryDataByWeight(context: Context, listener: OnGetCategoryListListener?) {
+            val categoryList = WorkDbHelper.getInstance(context).getCategoryByWeight()
+            listener?.onSuccess(categoryList as ArrayList<CategoryEntity>)
+        }
+
         fun findCategoryById(context: Context, id: Int, listener: OnGetCategoryListener?) {
             val category = WorkDbHelper.getInstance(context).getCategoryById(id)
             listener?.onSuccess(id, category)
@@ -31,8 +36,12 @@ class CategoryLogic {
 
         fun delete(context: Context, categoryList: ArrayList<CategoryEntity>?) {
             for (categoryEntity in categoryList!!) {
-                delete(context,categoryEntity)
+                delete(context, categoryEntity)
             }
+        }
+
+        fun categoryClick(context: Context, id: Int) {
+            WorkDbHelper.getInstance(context).categoryClick(id)
         }
     }
 

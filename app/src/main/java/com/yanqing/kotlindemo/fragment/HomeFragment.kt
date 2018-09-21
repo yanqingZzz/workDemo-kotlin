@@ -15,7 +15,9 @@ import com.yanqing.kotlindemo.activity.AddWorkActivity
 import com.yanqing.kotlindemo.adapter.BaseAdapter
 import com.yanqing.kotlindemo.adapter.HomeFragmentAdapter
 import com.yanqing.kotlindemo.constant.Constant
+import com.yanqing.kotlindemo.db.entity.CategoryEntity
 import com.yanqing.kotlindemo.db.entity.WorkEntity
+import com.yanqing.kotlindemo.logic.CategoryLogic
 import com.yanqing.kotlindemo.logic.HomeLogic
 
 class HomeFragment : BaseFragment(), HomeLogic.OnGetHomeListListener {
@@ -65,11 +67,19 @@ class HomeFragment : BaseFragment(), HomeLogic.OnGetHomeListListener {
     }
 
     private fun getListData() {
-        HomeLogic.getHomeListData(context, 0, this)
+        HomeLogic.getHomeListData(context, this)
     }
 
-    override fun onSuccess(data: ArrayList<WorkEntity>, hasMore: Boolean, page: Int) {
-        mAdapter?.setItemData(data, hasMore)
+    private fun getListByPage(page: Int) {
+        HomeLogic.getHomeListDataByPage(context, page, this)
+    }
+
+    override fun onSuccess(data: ArrayList<WorkEntity>, categoryList: ArrayList<CategoryEntity>) {
+        mAdapter?.setItemData(data, categoryList)
+    }
+
+    override fun onSuccessByPage(data: ArrayList<WorkEntity>, hasMore: Boolean, page: Int) {
+        mAdapter?.setItemDataByPage(data, hasMore)
     }
 
     override fun onFailed(page: Int) {

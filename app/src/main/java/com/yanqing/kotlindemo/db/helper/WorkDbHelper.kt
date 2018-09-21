@@ -54,23 +54,27 @@ class WorkDbHelper constructor(context: Context) {
         mDbInstance.categoryDao().delete(categoryEntity)
     }
 
-    fun updateCategory(categoryEntity: CategoryEntity){
+    fun updateCategory(categoryEntity: CategoryEntity) {
         mDbInstance.categoryDao().update(categoryEntity)
     }
 
     fun getAllCategory(): List<CategoryEntity> {
-        val list = mDbInstance.categoryDao().queryAll() as MutableList<CategoryEntity>
-        for (s in DbConstant.CATEGORY_DEFAULT) {
-            val category = CategoryEntity()
-            category.category = s
-            category.canEdit = false
-            category.timeStamp = System.currentTimeMillis()
-            list.add(0, category)
-        }
-        return list
+        return mDbInstance.categoryDao().queryAll()
     }
 
     fun getCategoryById(id: Int): CategoryEntity {
         return mDbInstance.categoryDao().query(id)
+    }
+
+    fun categoryClick(id: Int) {
+        mDbInstance.categoryDao().categoryUse(id)
+    }
+
+    fun getCategoryByWeight(): List<CategoryEntity> {
+        return mDbInstance.categoryDao().getCategoryByWeight()
+    }
+
+    fun getCategoryCount(): Int {
+        return mDbInstance.categoryDao().getCategoryCount()
     }
 }
