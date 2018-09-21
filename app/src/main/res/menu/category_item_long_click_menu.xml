@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/detail"
+        android:title="查看分类事物" />
+    <item
+        android:id="@+id/delete"
+        android:title="删除分类" />
+    <item
+        android:id="@+id/edit"
+        android:title="编辑分类名" />
+    <item
+        android:id="@+id/delete_all"
+        android:title="多选操作" />
 </menu>

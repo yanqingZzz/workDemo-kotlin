@@ -3,12 +3,14 @@ package com.yanqing.kotlindemo.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.KeyEvent
 import com.yanqing.kotlindemo.R
 import com.yanqing.kotlindemo.fragment.*
 import com.yanqing.kotlindemo.views.DockBarView
 
 class MainActivity : BaseActivity(), DockBarView.OnDockBarItemClickListener {
     private val mDockBarView: DockBarView by lazy { findViewById<DockBarView>(R.id.dock_bar) }
+    private var mCurrentFragment: BaseFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +72,7 @@ class MainActivity : BaseActivity(), DockBarView.OnDockBarItemClickListener {
     }
 
     private fun showFragment(index: Int, fragment: BaseFragment, tag: String) {
+        mCurrentFragment = fragment
         mDockBarView.setItemSelected(index)
         supportFragmentManager.inTransaction {
             replace(R.id.main_container, fragment, tag)
@@ -85,6 +88,14 @@ class MainActivity : BaseActivity(), DockBarView.OnDockBarItemClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (mCurrentFragment?.onKeyDown(keyCode, event)!!) {
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
 }

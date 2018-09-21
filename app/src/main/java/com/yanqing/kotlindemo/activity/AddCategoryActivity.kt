@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import com.yanqing.kotlindemo.R
 import com.yanqing.kotlindemo.constant.Constant
 import com.yanqing.kotlindemo.db.entity.CategoryEntity
@@ -15,7 +16,7 @@ import com.yanqing.kotlindemo.logic.CategoryLogic
 class AddCategoryActivity : ToolbarActivity(), CategoryLogic.OnGetCategoryListener {
 
     private val mCategoryInput by lazy { findViewById<EditText>(R.id.add_category_input) }
-    private val mCategorySave by lazy { findViewById<EditText>(R.id.add_category_save) }
+    private val mCategorySave by lazy { findViewById<TextView>(R.id.add_category_save) }
 
     private var mCategoryId: Int = -1
 
@@ -31,6 +32,7 @@ class AddCategoryActivity : ToolbarActivity(), CategoryLogic.OnGetCategoryListen
 
     override fun onSuccess(id: Int, categoryEntity: CategoryEntity) {
         mCategoryInput.setText(categoryEntity.category!!)
+        mCategoryInput.setSelection(categoryEntity.category?.length!!)
     }
 
     override fun onFailed(id: Int) {
@@ -61,9 +63,9 @@ class AddCategoryActivity : ToolbarActivity(), CategoryLogic.OnGetCategoryListen
         categoryEntity.category = categoryTitle
         categoryEntity.timeStamp = System.currentTimeMillis()
         categoryEntity.canEdit = true
-        categoryEntity.id = mCategoryId
 
         if (mCategoryId > 0) {
+            categoryEntity.id = mCategoryId
             CategoryLogic.update(this, categoryEntity)
         } else {
             CategoryLogic.insert(this, categoryEntity)

@@ -24,6 +24,16 @@ class CategoryLogic {
         fun update(context: Context, categoryEntity: CategoryEntity) {
             WorkDbHelper.getInstance(context).updateCategory(categoryEntity)
         }
+
+        fun delete(context: Context, categoryEntity: CategoryEntity) {
+            WorkDbHelper.getInstance(context).deleteCategory(categoryEntity)
+        }
+
+        fun delete(context: Context, categoryList: ArrayList<CategoryEntity>?) {
+            for (categoryEntity in categoryList!!) {
+                delete(context,categoryEntity)
+            }
+        }
     }
 
     interface OnGetCategoryListener {
